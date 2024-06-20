@@ -128,5 +128,5 @@ const getUserRentalsFromDB = async (userEmail: string) => {
 export const BookingServices = {
   createBookingIntoDB,
   updateBookingIntoDB,
-  getUserRentalsFromDB
+  getUserRentalsFromDB,
 };

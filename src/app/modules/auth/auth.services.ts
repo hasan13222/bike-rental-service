@@ -4,7 +4,7 @@ import { User } from '../user/user.model';
 import config from '../../config';
 import AppError from '../../errors/AppError';
 import { StatusCodes } from 'http-status-codes';
-import jwt from 'jsonwebtoken'
+import jwt from 'jsonwebtoken';
 
 const createUserIntoDB = async (payload: TUser) => {
   const newUser = payload;
@@ -17,30 +17,32 @@ const createUserIntoDB = async (payload: TUser) => {
   return result;
 };
 
-
 const loginAuth = async (payload: TUserLoginDetails) => {
-//  check if user exists
-const user = await User.findOne({email: payload.email}).select("+password");
-if (!user){
-  throw new AppError(StatusCodes.NOT_FOUND, 'User not found');
-}
+  //  check if user exists
+  const user = await User.findOne({ email: payload.email }).select('+password');
+  if (!user) {
+    throw new AppError(StatusCodes.NOT_FOUND, 'User not found');
+  }
 
-const isPasswordMatched = await bcrypt.compare(payload.password, user.password);
-if (!isPasswordMatched){
-  throw new AppError(StatusCodes.BAD_REQUEST, 'Password not matched');
-}
+  const isPasswordMatched = await bcrypt.compare(
+    payload.password,
+    user.password,
+  );
+  if (!isPasswordMatched) {
+    throw new AppError(StatusCodes.BAD_REQUEST, 'Password not matched');
+  }
 
-const jwtPayload = {
-  role: user.role,
-  email: user.email,
-}
+  const jwtPayload = {
+    role: user.role,
+    email: user.email,
+  };
 
-const token = jwt.sign(jwtPayload, config.access_token_secret as string);
+  const token = jwt.sign(jwtPayload, config.access_token_secret as string);
 
-return {user, token};
-}
+  return { user, token };
+};
 
 export const AuthServices = {
   createUserIntoDB,
-  loginAuth
+  loginAuth,
 };

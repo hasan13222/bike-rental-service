@@ -1,4 +1,4 @@
-import { USER_ROLE } from "./user.contsts";
+import { USER_ROLE } from './user.contsts';
 
 export type TUserRole = keyof typeof USER_ROLE;
 
@@ -11,7 +11,7 @@ export interface TUser {
   role: TUserRole;
 }
 
-export type TUserLoginDetails = {  
+export type TUserLoginDetails = {
   email: string;
   password: string;
-}
+};

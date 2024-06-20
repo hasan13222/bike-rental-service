@@ -30,13 +30,13 @@ export const globalErrorHandler: ErrorRequestHandler = (
       statusCode = StatusCodes.BAD_REQUEST;
     }
 
-    if(err?.name === 'ValidationError'){
+    if (err?.name === 'ValidationError') {
       errorSources = handleValidationError(err);
       message = 'Validation Error';
       statusCode = StatusCodes.BAD_REQUEST;
     }
 
-    if(err?.name === 'CastError'){
+    if (err?.name === 'CastError') {
       errorSources = handleCastError(err);
       message = 'Invalid Id';
       statusCode = StatusCodes.BAD_REQUEST;

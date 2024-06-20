@@ -14,7 +14,10 @@ const getUser = catchAsync(async (req: Request, res: Response) => {
 });
 
 const updateUser = catchAsync(async (req: Request, res: Response) => {
-  const result = await UserServices.updateUserIntoDB(req?.user?.email, req.body);
+  const result = await UserServices.updateUserIntoDB(
+    req?.user?.email,
+    req.body,
+  );
   sendResponse(res, {
     status: StatusCodes.OK,
     message: 'Profile updated successfully',
@@ -24,5 +27,5 @@ const updateUser = catchAsync(async (req: Request, res: Response) => {
 
 export const UserControllers = {
   getUser,
-  updateUser
+  updateUser,
 };

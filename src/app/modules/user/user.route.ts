@@ -6,6 +6,11 @@ import { UserValidations } from './user.validation';
 const router = express.Router();
 
 router.get('/me', verifyToken(), UserControllers.getUser);
-router.put('/me', verifyToken(), validateRequest(UserValidations.updateUserValidationSchema), UserControllers.updateUser);
+router.put(
+  '/me',
+  verifyToken(),
+  validateRequest(UserValidations.updateUserValidationSchema),
+  UserControllers.updateUser,
+);
 
 export const UserRoutes = router;
