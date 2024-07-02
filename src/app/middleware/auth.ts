@@ -30,7 +30,7 @@ export const verifyToken = (...requiredRoles: TUserRole[]) => {
       throw new AppError(StatusCodes.NOT_FOUND, 'This user is not found !');
     }
 
-    if (requiredRoles.length > 0 && requiredRoles.includes(role)) {
+    if (requiredRoles.length > 0 && !requiredRoles.includes(role)) {
       throw new AppError(StatusCodes.UNAUTHORIZED, 'You are not authorized');
     }
 
