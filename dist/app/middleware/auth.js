@@ -35,7 +35,7 @@ const verifyToken = (...requiredRoles) => {
         if (!user) {
             throw new AppError_1.default(http_status_codes_1.StatusCodes.NOT_FOUND, 'This user is not found !');
         }
-        if (requiredRoles.length > 0 && requiredRoles.includes(role)) {
+        if (requiredRoles.length > 0 && !requiredRoles.includes(role)) {
             throw new AppError_1.default(http_status_codes_1.StatusCodes.UNAUTHORIZED, 'You are not authorized');
         }
         req.user = decoded;

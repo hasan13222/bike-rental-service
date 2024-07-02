@@ -13,6 +13,7 @@ exports.validateRequest = void 0;
 const validateRequest = (schema) => {
     return (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
         try {
+            console.log(req);
             yield schema.parseAsync({ body: req.body });
             next();
         }
