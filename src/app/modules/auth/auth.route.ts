@@ -2,6 +2,7 @@ import express from 'express';
 import { validateRequest } from '../../middleware/validateRequest';
 import { UserValidations } from '../user/user.validation';
 import { AuthControllers } from './auth.controller';
+import { verifyCookieToken } from '../../middleware/auth';
 const router = express.Router();
 
 router.post(
@@ -14,5 +15,8 @@ router.post(
   validateRequest(UserValidations.loginUserValidationSchema),
   AuthControllers.login,
 );
+
+router.get('/check-login', verifyCookieToken(), AuthControllers.checkLogin());
+router.get('/logout', AuthControllers.logout())
 
 export const AuthRoutes = router;

@@ -39,6 +39,6 @@ export const sendAuthResponse = <T>(
     statusCode: data.status,
     message: data.message,
     token: data.token,
-    data: data.data,
+    data: data.data
   });
 };

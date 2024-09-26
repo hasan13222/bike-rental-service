@@ -11,6 +11,7 @@ const createBikeValidationSchema = z.object({
     year: z.number().min(1900).max(currentYear),
     model: z.string(),
     brand: z.string(),
+    image: z.string().optional(),
   }),
 });
 
@@ -24,6 +25,7 @@ const updateBikeValidationSchema = z.object({
     year: z.number().min(1900).max(currentYear).optional(),
     model: z.string().optional(),
     brand: z.string().optional(),
+    image: z.string().optional(),
   }),
 });
 

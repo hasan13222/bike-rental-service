@@ -13,6 +13,14 @@ router.post(
 );
 router.put('/:id/return', verifyToken('admin'), BookingControllers.returnBike);
 
+// final payment
+router.patch('/:id/pay', BookingControllers.doPayment);
+router.patch('/:id/discount', BookingControllers.fixDiscount);
+
 router.get('/', verifyToken(), BookingControllers.getUserBooking);
+router.get('/all', verifyToken('admin'), BookingControllers.getAllBooking);
+
+// advance payment
+router.post('/payment', BookingControllers.takeAdvancePayment);
 
 export const BookingRoutes = router;

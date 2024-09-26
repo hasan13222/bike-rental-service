@@ -29,7 +29,7 @@ const sendAuthResponse = (res, data) => {
         statusCode: data.status,
         message: data.message,
         token: data.token,
-        data: data.data,
+        data: data.data
     });
 };
 exports.sendAuthResponse = sendAuthResponse;

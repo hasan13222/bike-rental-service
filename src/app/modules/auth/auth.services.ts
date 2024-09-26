@@ -8,6 +8,7 @@ import jwt from 'jsonwebtoken';
 
 const createUserIntoDB = async (payload: TUser) => {
   const newUser = payload;
+  newUser.role = 'user';
   const hashedPassword = await bcrypt.hash(
     newUser.password,
     Number(config.bcrypt_salt_rounds),
@@ -41,6 +42,8 @@ const loginAuth = async (payload: TUserLoginDetails) => {
 
   return { user, token };
 };
+
+
 
 export const AuthServices = {
   createUserIntoDB,

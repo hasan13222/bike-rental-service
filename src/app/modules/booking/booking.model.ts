@@ -9,6 +9,7 @@ const bookingSchema = new Schema<TBooking>({
   bikeId: {
     type: Schema.Types.ObjectId,
     required: true,
+    ref: 'Bike'
   },
   startTime: {
     type: Date,
@@ -22,10 +23,18 @@ const bookingSchema = new Schema<TBooking>({
     type: Number,
     default: 0,
   },
+  discount: {
+    type: Number,
+    default: 0,
+  },
   isReturned: {
     type: Boolean,
     default: false,
   },
+  status: {
+    type: String,
+    default: "unpaid"
+  }
 });
 
 export const Booking = model<TBooking>('Booking', bookingSchema);

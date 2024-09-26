@@ -20,6 +20,10 @@ const getAllBikeFromDB = () => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield bike_model_1.Bike.find();
     return result;
 });
+const getSingleFromDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield bike_model_1.Bike.findById(id);
+    return result;
+});
 const updateBikeIntoDB = (id, payload) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield bike_model_1.Bike.findByIdAndUpdate(id, payload, { new: true });
     return result;
@@ -33,4 +37,5 @@ exports.BikeServices = {
     getAllBikeFromDB,
     updateBikeIntoDB,
     deleteBikeFromDB,
+    getSingleFromDB
 };

@@ -120,7 +120,35 @@ const getUserRentalsFromDB = async (userEmail: string) => {
     throw new AppError(StatusCodes.NOT_FOUND, 'User not found');
   }
 
-  const result = await Booking.find({ userId: user._id });
+  const result = await Booking.find({ userId: user._id }).populate({
+    path: 'bikeId',
+    select: 'name',
+  });
+
+  return result;
+};
+
+const getAllRentalsFromDB = async () => {
+  const result = await Booking.find({ status: 'unpaid' }).populate({
+    path: 'bikeId',
+    select: 'name',
+  });
+
+  return result;
+};
+
+const bookingPaymentIntoDB = async (bookingId: string, discount: number) => {
+  const result = await Booking.findByIdAndUpdate(bookingId, {
+    status: 'paid',
+    discount: discount,
+  });
+  return result;
+};
+
+const fixDiscountIntoDB = async (bookingId: string, discount: number) => {
+  const result = await Booking.findByIdAndUpdate(bookingId, {
+    discount: discount,
+  });
 
   return result;
 };
@@ -129,4 +157,7 @@ export const BookingServices = {
   createBookingIntoDB,
   updateBookingIntoDB,
   getUserRentalsFromDB,
+  getAllRentalsFromDB,
+  bookingPaymentIntoDB,
+  fixDiscountIntoDB,
 };

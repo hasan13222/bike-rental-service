@@ -13,6 +13,7 @@ const createBikeValidationSchema = zod_1.z.object({
         year: zod_1.z.number().min(1900).max(currentYear),
         model: zod_1.z.string(),
         brand: zod_1.z.string(),
+        image: zod_1.z.string().optional(),
     }),
 });
 const updateBikeValidationSchema = zod_1.z.object({
@@ -25,6 +26,7 @@ const updateBikeValidationSchema = zod_1.z.object({
         year: zod_1.z.number().min(1900).max(currentYear).optional(),
         model: zod_1.z.string().optional(),
         brand: zod_1.z.string().optional(),
+        image: zod_1.z.string().optional(),
     }),
 });
 exports.BikeValidations = {

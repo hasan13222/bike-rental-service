@@ -34,6 +34,9 @@ const bikeSchema = new Schema<TBike>({
     type: String,
     required: true,
   },
+  image: {
+    type: String,
+  }
 });
 
 export const Bike = model<TBike>('Bike', bikeSchema);

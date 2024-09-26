@@ -10,6 +10,7 @@ const bookingSchema = new mongoose_1.Schema({
     bikeId: {
         type: mongoose_1.Schema.Types.ObjectId,
         required: true,
+        ref: 'Bike'
     },
     startTime: {
         type: Date,
@@ -23,9 +24,17 @@ const bookingSchema = new mongoose_1.Schema({
         type: Number,
         default: 0,
     },
+    discount: {
+        type: Number,
+        default: 0,
+    },
     isReturned: {
         type: Boolean,
         default: false,
     },
+    status: {
+        type: String,
+        default: "unpaid"
+    }
 });
 exports.Booking = (0, mongoose_1.model)('Booking', bookingSchema);

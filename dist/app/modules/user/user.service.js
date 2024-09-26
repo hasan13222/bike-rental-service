@@ -15,13 +15,28 @@ const getUserFromDB = (email) => __awaiter(void 0, void 0, void 0, function* () 
     const result = yield user_model_1.User.findOne({ email: email }).select('+');
     return result;
 });
+const getAllUserFromDB = () => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield user_model_1.User.find().select('+');
+    return result;
+});
 const updateUserIntoDB = (email, payload) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield user_model_1.User.findOneAndUpdate({ email: email }, payload, {
         new: true,
     });
     return result;
 });
+const deleteUserFromDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield user_model_1.User.findByIdAndDelete(id);
+    return result;
+});
+const promoterUserToAdmin = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield user_model_1.User.findByIdAndUpdate(id, { role: 'admin' });
+    return result;
+});
 exports.UserServices = {
     getUserFromDB,
     updateUserIntoDB,
+    getAllUserFromDB,
+    deleteUserFromDB,
+    promoterUserToAdmin
 };

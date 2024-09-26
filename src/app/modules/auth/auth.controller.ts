@@ -20,8 +20,10 @@ const login = catchAsync(async (req: Request, res: Response) => {
   const result = await AuthServices.loginAuth(req.body);
   const { token, user } = result;
   res.cookie('token', token, {
-    secure: config.node_env === 'production',
+    secure: config.node_env === 'Production',
     httpOnly: true,
+    sameSite: 'none',
+    maxAge: 90 * 24 * 60 * 60 * 1000,
   });
   sendAuthResponse(res, {
     status: StatusCodes.OK,
@@ -31,7 +33,32 @@ const login = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+
+const checkLogin = () => (req: Request, res: Response) => {
+  sendResponse(res, {
+    status: StatusCodes.OK,
+    message: 'User Logged In successfully',
+    data: req?.user,
+  });
+};
+
+const logout = () => (req: Request, res: Response) => {
+  res.cookie('token', 'token', {
+    secure: config.node_env === 'Production',
+    httpOnly: true,
+    sameSite: 'none',
+    maxAge: 90 * 24 * 60 * 60 * 1000,
+  });
+  sendResponse(res, {
+    status: StatusCodes.OK,
+    message: 'User Logged out successfully',
+    data: {},
+  });
+};
+
 export const AuthControllers = {
   signup,
   login,
+  checkLogin,
+  logout,
 };

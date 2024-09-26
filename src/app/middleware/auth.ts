@@ -38,3 +38,37 @@ export const verifyToken = (...requiredRoles: TUserRole[]) => {
     next();
   });
 };
+
+export const verifyCookieToken = (...requiredRoles: TUserRole[]) => {
+  return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+    const token = req.cookies.token;
+
+    // check if token is missing
+    if (!token) {
+      console.log('token is missing')
+      throw new AppError(StatusCodes.UNAUTHORIZED, 'You are not authorized');
+    }
+    // check if the token is valid
+    const decoded = jwt.verify(
+      token,
+      config.access_token_secret as string,
+    ) as JwtPayload;
+
+    const { email, role } = decoded as JwtPayload;
+
+    // checking if the user is exist
+    const user = await User.findOne({ email: email });
+
+    if (!user) {
+      throw new AppError(StatusCodes.NOT_FOUND, 'This user is not found !');
+    }
+
+    if (requiredRoles.length > 0 && !requiredRoles.includes(role)) {
+      throw new AppError(StatusCodes.UNAUTHORIZED, 'You are not authorized');
+    }
+
+    req.user = {...decoded as JwtPayload, token, name: user.name};
+    next();
+  });
+};
+

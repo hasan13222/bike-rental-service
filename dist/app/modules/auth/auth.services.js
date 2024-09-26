@@ -21,6 +21,7 @@ const http_status_codes_1 = require("http-status-codes");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const createUserIntoDB = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     const newUser = payload;
+    newUser.role = 'user';
     const hashedPassword = yield bcrypt_1.default.hash(newUser.password, Number(config_1.default.bcrypt_salt_rounds));
     newUser.password = hashedPassword;
     const result = yield user_model_1.User.create(newUser);

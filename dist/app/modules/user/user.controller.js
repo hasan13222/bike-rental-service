@@ -23,6 +23,23 @@ const getUser = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, voi
         data: result,
     });
 }));
+const getAllUser = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield user_service_1.UserServices.getAllUserFromDB();
+    (0, sendResponse_1.sendResponse)(res, {
+        status: http_status_codes_1.StatusCodes.OK,
+        message: 'User Profile retrieved successfully',
+        data: result,
+    });
+}));
+const deleteUser = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const userId = req.params.userId;
+    const result = yield user_service_1.UserServices.deleteUserFromDB(userId);
+    (0, sendResponse_1.sendResponse)(res, {
+        status: http_status_codes_1.StatusCodes.OK,
+        message: 'User deleted successfully',
+        data: result,
+    });
+}));
 const updateUser = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _b;
     const result = yield user_service_1.UserServices.updateUserIntoDB((_b = req === null || req === void 0 ? void 0 : req.user) === null || _b === void 0 ? void 0 : _b.email, req.body);
@@ -32,7 +49,19 @@ const updateUser = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, 
         data: result,
     });
 }));
+const promoteUser = () => (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const userId = req.params.id;
+    const result = yield user_service_1.UserServices.promoterUserToAdmin(userId);
+    (0, sendResponse_1.sendResponse)(res, {
+        status: http_status_codes_1.StatusCodes.OK,
+        message: 'User Promoted successfully',
+        data: result,
+    });
+}));
 exports.UserControllers = {
     getUser,
     updateUser,
+    getAllUser,
+    deleteUser,
+    promoteUser
 };

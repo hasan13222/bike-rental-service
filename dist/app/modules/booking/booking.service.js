@@ -103,11 +103,37 @@ const getUserRentalsFromDB = (userEmail) => __awaiter(void 0, void 0, void 0, fu
     if (!user) {
         throw new AppError_1.default(http_status_codes_1.StatusCodes.NOT_FOUND, 'User not found');
     }
-    const result = yield booking_model_1.Booking.find({ userId: user._id });
+    const result = yield booking_model_1.Booking.find({ userId: user._id }).populate({
+        path: 'bikeId',
+        select: 'name',
+    });
+    return result;
+});
+const getAllRentalsFromDB = () => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield booking_model_1.Booking.find({ status: 'unpaid' }).populate({
+        path: 'bikeId',
+        select: 'name',
+    });
+    return result;
+});
+const bookingPaymentIntoDB = (bookingId, discount) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield booking_model_1.Booking.findByIdAndUpdate(bookingId, {
+        status: 'paid',
+        discount: discount,
+    });
+    return result;
+});
+const fixDiscountIntoDB = (bookingId, discount) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield booking_model_1.Booking.findByIdAndUpdate(bookingId, {
+        discount: discount,
+    });
     return result;
 });
 exports.BookingServices = {
     createBookingIntoDB,
     updateBookingIntoDB,
     getUserRentalsFromDB,
+    getAllRentalsFromDB,
+    bookingPaymentIntoDB,
+    fixDiscountIntoDB,
 };

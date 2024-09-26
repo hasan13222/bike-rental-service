@@ -38,6 +38,15 @@ const getAllBikes = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0,
         data: result,
     });
 }));
+const getSingleBike = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const bikeId = req.params.id;
+    const result = yield bike_service_1.BikeServices.getSingleFromDB(bikeId);
+    (0, sendResponse_1.sendResponse)(res, {
+        status: http_status_codes_1.StatusCodes.OK,
+        message: 'Single Bike retrieved successfully',
+        data: result,
+    });
+}));
 const updateBike = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const bikeId = req.params.id;
     const result = yield bike_service_1.BikeServices.updateBikeIntoDB(bikeId, req.body);
@@ -61,4 +70,5 @@ exports.BikeControllers = {
     getAllBikes,
     updateBike,
     deleteBike,
+    getSingleBike
 };

@@ -32,8 +32,10 @@ const login = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 
     const result = yield auth_services_1.AuthServices.loginAuth(req.body);
     const { token, user } = result;
     res.cookie('token', token, {
-        secure: config_1.default.node_env === 'production',
+        secure: config_1.default.node_env === 'Production',
         httpOnly: true,
+        sameSite: 'none',
+        maxAge: 90 * 24 * 60 * 60 * 1000,
     });
     (0, sendResponse_1.sendAuthResponse)(res, {
         status: http_status_codes_1.StatusCodes.OK,
@@ -42,7 +44,29 @@ const login = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 
         data: user,
     });
 }));
+const checkLogin = () => (req, res) => {
+    (0, sendResponse_1.sendResponse)(res, {
+        status: http_status_codes_1.StatusCodes.OK,
+        message: 'User Logged In successfully',
+        data: req === null || req === void 0 ? void 0 : req.user,
+    });
+};
+const logout = () => (req, res) => {
+    res.cookie('token', 'token', {
+        secure: config_1.default.node_env === 'Production',
+        httpOnly: true,
+        sameSite: 'none',
+        maxAge: 90 * 24 * 60 * 60 * 1000,
+    });
+    (0, sendResponse_1.sendResponse)(res, {
+        status: http_status_codes_1.StatusCodes.OK,
+        message: 'User Logged out successfully',
+        data: {},
+    });
+};
 exports.AuthControllers = {
     signup,
     login,
+    checkLogin,
+    logout,
 };

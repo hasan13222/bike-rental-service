@@ -7,4 +7,5 @@ export interface TBike {
   year: number;
   model: string;
   brand: string;
+  image?: string;
 }
