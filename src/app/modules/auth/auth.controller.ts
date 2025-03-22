@@ -43,11 +43,12 @@ const checkLogin = () => (req: Request, res: Response) => {
 };
 
 const logout = () => (req: Request, res: Response) => {
-  res.cookie('token', 'token', {
+  res.clearCookie('token', {
     secure: config.node_env === 'Production',
     httpOnly: true,
     sameSite: 'none',
-    maxAge: 90 * 24 * 60 * 60 * 1000,
+    maxAge: 0,
+    expires: new Date()
   });
   sendResponse(res, {
     status: StatusCodes.OK,

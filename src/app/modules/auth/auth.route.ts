@@ -17,6 +17,6 @@ router.post(
 );
 
 router.get('/check-login', verifyCookieToken(), AuthControllers.checkLogin());
-router.get('/logout', AuthControllers.logout())
+router.post('/logout', AuthControllers.logout())
 
 export const AuthRoutes = router;

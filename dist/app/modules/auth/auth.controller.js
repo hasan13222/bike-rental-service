@@ -52,11 +52,12 @@ const checkLogin = () => (req, res) => {
     });
 };
 const logout = () => (req, res) => {
-    res.cookie('token', 'token', {
+    res.clearCookie('token', {
         secure: config_1.default.node_env === 'Production',
         httpOnly: true,
         sameSite: 'none',
-        maxAge: 90 * 24 * 60 * 60 * 1000,
+        maxAge: 0,
+        expires: new Date()
     });
     (0, sendResponse_1.sendResponse)(res, {
         status: http_status_codes_1.StatusCodes.OK,

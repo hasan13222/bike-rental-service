@@ -14,7 +14,7 @@ const createBike = catchAsync(async (req: Request, res: Response) => {
 });
 
 const getAllBikes = catchAsync(async (req: Request, res: Response) => {
-  const result = await BikeServices.getAllBikeFromDB();
+  const result = await BikeServices.getAllBikeFromDB(req.query);
   if (result.length === 0) {
     sendResponse(res, {
       success: false,

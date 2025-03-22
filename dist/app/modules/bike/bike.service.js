@@ -16,8 +16,10 @@ const createBikeIntoDB = (payload) => __awaiter(void 0, void 0, void 0, function
     const result = yield bike_model_1.Bike.create(newBike);
     return result;
 });
-const getAllBikeFromDB = () => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield bike_model_1.Bike.find();
+const getAllBikeFromDB = (query) => __awaiter(void 0, void 0, void 0, function* () {
+    const limit = Number(query === null || query === void 0 ? void 0 : query.limit) || 8;
+    const sort = (query === null || query === void 0 ? void 0 : query.sort) || "isAvailable";
+    const result = yield bike_model_1.Bike.find().sort(sort).limit(limit);
     return result;
 });
 const getSingleFromDB = (id) => __awaiter(void 0, void 0, void 0, function* () {

@@ -23,7 +23,7 @@ const createBike = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, 
     });
 }));
 const getAllBikes = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield bike_service_1.BikeServices.getAllBikeFromDB();
+    const result = yield bike_service_1.BikeServices.getAllBikeFromDB(req.query);
     if (result.length === 0) {
         (0, sendResponse_1.sendResponse)(res, {
             success: false,
