@@ -122,7 +122,7 @@ const getUserRentalsFromDB = async (userEmail: string) => {
 
   const result = await Booking.find({ userId: user._id }).populate({
     path: 'bikeId',
-    select: 'name',
+    select: 'name _id',
   });
 
   return result;

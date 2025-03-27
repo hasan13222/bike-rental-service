@@ -67,7 +67,7 @@ export const verifyCookieToken = (...requiredRoles: TUserRole[]) => {
       throw new AppError(StatusCodes.UNAUTHORIZED, 'You are not authorized');
     }
 
-    req.user = {...decoded as JwtPayload, token, name: user.name};
+    req.user = {...decoded as JwtPayload, token, name: user.name, id: user._id};
     next();
   });
 };

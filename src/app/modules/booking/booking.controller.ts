@@ -3,8 +3,8 @@ import { catchAsync } from '../../utils/catchAsync';
 import { sendResponse } from '../../utils/sendResponse';
 import { StatusCodes } from 'http-status-codes';
 import { BookingServices } from './booking.service';
-import stripe from 'stripe'
 import config from '../../config';
+import stripe from 'stripe'
 
 const stripeinstance = new stripe(config.stripe_secret as string);
 

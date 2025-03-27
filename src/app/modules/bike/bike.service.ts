@@ -8,9 +8,8 @@ const createBikeIntoDB = async (payload: TBike) => {
 };
 
 const getAllBikeFromDB = async (query: any) => {
-  const limit = Number(query?.limit) || 8;
   const sort = query?.sort || "isAvailable";
-  const result = await Bike.find().sort(sort).limit(limit);
+  const result = await Bike.find().sort(sort);
   return result;
 };
 
