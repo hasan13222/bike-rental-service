@@ -7,6 +7,10 @@ const reviewSchema = new Schema<TReview>(
       type: String,
       required: true,
     },
+    rating: {
+      type: Number,
+      required: true,
+    },
     userId: {
       type: Schema.Types.ObjectId,
       required: true,

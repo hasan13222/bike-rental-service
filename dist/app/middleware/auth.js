@@ -62,7 +62,7 @@ const verifyCookieToken = (...requiredRoles) => {
         if (requiredRoles.length > 0 && !requiredRoles.includes(role)) {
             throw new AppError_1.default(http_status_codes_1.StatusCodes.UNAUTHORIZED, 'You are not authorized');
         }
-        req.user = Object.assign(Object.assign({}, decoded), { token, name: user.name });
+        req.user = Object.assign(Object.assign({}, decoded), { token, name: user.name, id: user._id });
         next();
     }));
 };

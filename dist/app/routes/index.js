@@ -9,6 +9,7 @@ const user_route_1 = require("../modules/user/user.route");
 const bike_route_1 = require("../modules/bike/bike.route");
 const booking_route_1 = require("../modules/booking/booking.route");
 const coupon_route_1 = require("../modules/coupon/coupon.route");
+const review_route_1 = require("../modules/review/review.route");
 const router = express_1.default.Router();
 const moduleRouters = [
     {
@@ -30,6 +31,10 @@ const moduleRouters = [
     {
         path: '/coupons',
         routes: coupon_route_1.CouponRoutes,
+    },
+    {
+        path: '/reviews',
+        routes: review_route_1.ReviewRoutes,
     },
 ];
 moduleRouters.forEach((route) => {

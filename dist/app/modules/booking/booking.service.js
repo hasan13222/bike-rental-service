@@ -105,7 +105,7 @@ const getUserRentalsFromDB = (userEmail) => __awaiter(void 0, void 0, void 0, fu
     }
     const result = yield booking_model_1.Booking.find({ userId: user._id }).populate({
         path: 'bikeId',
-        select: 'name',
+        select: 'name _id',
     });
     return result;
 });

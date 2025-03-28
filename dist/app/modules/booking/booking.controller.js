@@ -17,8 +17,8 @@ const catchAsync_1 = require("../../utils/catchAsync");
 const sendResponse_1 = require("../../utils/sendResponse");
 const http_status_codes_1 = require("http-status-codes");
 const booking_service_1 = require("./booking.service");
-const stripe_1 = __importDefault(require("stripe"));
 const config_1 = __importDefault(require("../../config"));
+const stripe_1 = __importDefault(require("stripe"));
 const stripeinstance = new stripe_1.default(config_1.default.stripe_secret);
 const createBooking = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
